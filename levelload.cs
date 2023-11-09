@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransition : MonoBehaviour
+public class levelload : MonoBehaviour
 {
     public string sceneToLoad; // Назва сцени, яку потрібно завантажити
 
