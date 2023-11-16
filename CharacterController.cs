@@ -11,7 +11,8 @@ public class CharacterController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");     // Для руху вгору/вниз
 
         // Рух персонажа
-        Vector3 movement = new Vector3(horizontalInput, 0.0f, verticalInput) * moveSpeed * Time.deltaTime;
-        transform.Translate(movement);
+        Vector3 movement = new Vector3(horizontalInput, verticalInput);
+        movement.Normilize();
+        transform.Translate(movement * moveSpeed * Time.deltaTime);
     }
 }
