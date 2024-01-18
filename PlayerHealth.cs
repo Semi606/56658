@@ -9,17 +9,21 @@ public class PlayerHealth : MonoBehaviour
     private int currentHealth;
     private GameManager scriptGM;
     public Transform PlayerStartPoint;
+    public Slider healthSlider;
+    public Text healthText;
     
 
     void Start()
     {
         currentHealth = maxHealth;
         scriptGM = FindObjectOfType<GameManager>();
+        UpdateHealthUI();
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        UpdateHealthUI();
         Debug.Log("Damage taken!");
 
         // Викликаємо метод обробки смерті, якщо здоров'я опускається до нуля або менше
@@ -32,6 +36,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeMedicine(int damage)
     {
         currentHealth += damage;
+        UpdateHealthUI();
         Debug.Log("Medicine taken!");
     }
 
@@ -46,6 +51,8 @@ public class PlayerHealth : MonoBehaviour
         }
         TeleportToStartPoint();
         Debug.Log("Player has died!");
+        currentHealth = 100;
+        UpdateHealthUI();
     }
 
     public void TeleportToStartPoint()
@@ -60,5 +67,11 @@ public class PlayerHealth : MonoBehaviour
         {
             Debug.LogWarning("Початкова точка не встановлена!");
         }
+    }
+
+    public void UpdateHealthUI()
+    {
+        healthSlider.value = currentHealth;
+        healthText.text = "Health: " + currentHealth.ToString();
     }
 }
